@@ -16,7 +16,7 @@ I will update the files whenever I have time.
 - 2 led's to indicate operation ( I used buttons with build in leds)
 At this moment the quickshifter is a plain relay thut cuts power to fuel injectors. I have plans to replace it with solid state mosfets to to control the power for the incetors or ignition coils in case of the carburated.  
 -more information on the wiring and pitures soon.  
-
+[What is this](git1.jpg)
 
 
 <!---
