@@ -19,7 +19,7 @@ At this moment the quickshifter is a plain relay thut cuts power to fuel injecto
 Here is a prototype PCB with changes I made later.  
 ![Prototype pcb](https://github.com/chester2400/chester2400/blob/main/git1.jpeg)  
 And here is the 3D printed main unit case and PCB.  
-![Prototype pcb and case](https://github.com/chester2400/chester2400/blob/main/git.jpeg)  
+![Prototype pcb and case](https://github.com/chester2400/chester2400/blob/main/git2.jpeg)  
 
 <!---
 chester2400/chester2400 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
