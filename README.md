@@ -16,7 +16,7 @@ I will update the files whenever I have time.
 - 2 led's to indicate operation ( I used buttons with build in leds)
 At this moment the quickshifter is a plain relay thut cuts power to fuel injectors. I have plans to replace it with solid state mosfets to to control the power for the incetors or ignition coils in case of the carburated.  
 -more information on the wiring and pitures soon.  
-!(https://github.com/chester2400/chester2400/blob/main/git1.jpeg)
+![Prototype pcb](https://github.com/chester2400/chester2400/blob/main/git1.jpeg)
 
 <!---
 chester2400/chester2400 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
