@@ -12,9 +12,9 @@ I will update the files whenever I have time.
 - servo motor to control the throttle.
 - dispay unit with arduino nano every (plain nano didnt have inaf memory for the whole program), oled display, and 5 RGB LED's (this unit is optional and not necesery for the cruise control funcionality but at this moment at least one oled screen is necesary to setup and tune PID's).
 - quickshifter sensor swich (also optional).
-- 3 button unit, 2 momentary pushbuttons and one on/off to power the main unit and to turn it off in case of emengancy.
+- 3 button unit, 2 momentary pushbuttons and one on/off to power the main unit and to turn it off in case of emergancy.
 - 2 led's to indicate operation ( I used buttons with build in leds)
-At this moment the quickshifter is a plain relay thut cuts power to fuel injectors. I have plans to replace it with solid state mosfets to to control the power for the incetors or ignition coils in case of the carburated.  
+At this moment the quickshifter is a plain relay that cuts power to fuel injectors. I have plans to replace it with solid state mosfets to to control the power for the injetors or ignition coils in case of the carburated bike.  
 -more information on the wiring and pitures soon.  
 Here is a prototype PCB with changes I made later.  
 ![Prototype pcb](https://github.com/chester2400/chester2400/blob/main/git1.jpeg)  
