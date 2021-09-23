@@ -4148,6 +4148,15 @@ else if (menu == 222){
   Serial1.print(multihigh);
   Serial1.write('|');  
 }
+else if (menu == 170 || menu == 180){
+  Serial1.write('B');
+  Serial1.print(HomePosition);
+    Serial1.write('|');
+    Serial1.print(EndPosition);
+      Serial1.write('|');
+}
+
+
 
 
 
@@ -4213,6 +4222,8 @@ if (rgbsetupON == 1){
   }
   
 }
+
+
   
 }
 
