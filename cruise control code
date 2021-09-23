@@ -4,7 +4,7 @@
 
 
 
-///////////////////////////////last eprom used 211///////////////////
+///////////////////////////////last eprom used 215///////////////////
 //      digital pin 32 to be used for relay control of soervo power suply.
 
 
@@ -1577,8 +1577,14 @@ EEPROM.get(207, epromfloat);
 if ((epromfloat > 0) && (epromfloat < 3)){
   wheeldiameter = epromfloat;
 }
-
-
+EEPROM.get(212,epromint);
+if ((epromint > 0 ) && (epromint < 3000)){
+  HomePosition = epromint; 
+}
+EEPROM.get(214,epromint);
+if ((epromint > 0 ) && (epromint < 3000)){
+  EndPosition = epromint; 
+}
 
 
 manualspeedup = 0;
@@ -2951,6 +2957,7 @@ if (menu == 170){
  if ((lpB == 1) || (lpA == 1)){
       lpA = 0;
       lpB = 0;
+      EEPROM.put(212,HomePosition);
       menu = 10;
      }
      if (spA == 1){
@@ -2967,6 +2974,7 @@ if (menu == 180){
  if ((lpB == 1) || (lpA == 1)){
       lpA = 0;
       lpB = 0;
+      EEPROM.put(214, EndPosition);
       menu = 10;
      }
      if (spA == 1){
