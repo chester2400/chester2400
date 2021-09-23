@@ -1,4 +1,4 @@
- //Copyright (c) 2021 Maciej Karłowicz.  All right reserved.
+
 
 
 
@@ -129,11 +129,15 @@ const char string_85[] PROGMEM = ">set medium speed";
 const char string_86[] PROGMEM = " set medium speed";
 const char string_87[] PROGMEM = ">set high speed";
 const char string_88[] PROGMEM = " set high speed";
+const char string_89[] PROGMEM = ">Set servo home position";
+const char string_90[] PROGMEM = " Set servo home position";
+const char string_91[] PROGMEM = ">Set servo end position";
+const char string_92[] PROGMEM = " Set servo end position";
 
 
 
 
-const char *const string_table[] PROGMEM = {string_0, string_1, string_2, string_3, string_4, string_5,string_6, string_7, string_8, string_9, string_10, string_11,string_12, string_13, string_14, string_15, string_16, string_17, string_18, string_19, string_20, string_21, string_22, string_23, string_24, string_25, string_26, string_27, string_28, string_29, string_30, string_31, string_32, string_33, string_34, string_35, string_36, string_37, string_38, string_39, string_40, string_41, string_42, string_43, string_44, string_45, string_46, string_47, string_48, string_49, string_50, string_51, string_52, string_53, string_54, string_55, string_56, string_57, string_58, string_59, string_60, string_61, string_62, string_63, string_64, string_65, string_66, string_67, string_68, string_69, string_70, string_71, string_72, string_73, string_74, string_75, string_76, string_77, string_78, string_79, string_80, string_81, string_82, string_83, string_84, string_85, string_86, string_87, string_88};
+const char *const string_table[] PROGMEM = {string_0, string_1, string_2, string_3, string_4, string_5,string_6, string_7, string_8, string_9, string_10, string_11,string_12, string_13, string_14, string_15, string_16, string_17, string_18, string_19, string_20, string_21, string_22, string_23, string_24, string_25, string_26, string_27, string_28, string_29, string_30, string_31, string_32, string_33, string_34, string_35, string_36, string_37, string_38, string_39, string_40, string_41, string_42, string_43, string_44, string_45, string_46, string_47, string_48, string_49, string_50, string_51, string_52, string_53, string_54, string_55, string_56, string_57, string_58, string_59, string_60, string_61, string_62, string_63, string_64, string_65, string_66, string_67, string_68, string_69, string_70, string_71, string_72, string_73, string_74, string_75, string_76, string_77, string_78, string_79, string_80, string_81, string_82, string_83, string_84, string_85, string_86, string_87, string_88, string_89, string_90, string_91, string_92};
 
 
 char buffer[25];
@@ -950,7 +954,8 @@ static const unsigned char PROGMEM gearN [] = {
 
 double angle;   // variable to hold the angle for the servo motor
 //double spd;
-
+int HomePosition = 900;
+int EndPosition = 1550;
 //const int chipSelect = 10;
 
 //////////////////////////////////////QS///////////////////////////
@@ -1579,8 +1584,8 @@ if ((epromfloat > 0) && (epromfloat < 3)){
 manualspeedup = 0;
 manualspeeddown = 0;
      Setpoint = 0;
-     Output = 900;
-angle = 900;
+     Output = HomePosition;
+angle = HomePosition;
    
    myServo.write(angle);    
      //pinMode(ledPin, OUTPUT);
@@ -1595,7 +1600,7 @@ angle = 900;
     //digitalWrite(ledPin, HIGH);
     //digitalWrite(ledpin2, LOW);
     //digitalWrite(relay, LOW);
-     myServo.attach(9, 900, 1550); // attaches the servo on pin 9 to the servo object
+     myServo.attach(9, HomePosition, EndPosition); // attaches the servo on pin 9 to the servo object
      myServo.write(angle);  
 
 servosweepup = 0;
@@ -1638,7 +1643,7 @@ pinMode(A3,INPUT);
 sampleRate = interval4;
   myPID.SetMode(MANUAL);  //Turn on the PID loop      uruchomienie pida
   myPID.SetSampleTime(sampleRate); //Sets the sample rate
-  myPID.SetOutputLimits(900, 1550);
+  myPID.SetOutputLimits(HomePosition, EndPosition);
  stantemp = 0;
 
 
@@ -1997,9 +2002,9 @@ if (delta < -30){
   manualspeedup = 0;
   manualspeeddown = 0;
   digitalWrite (ledpin2, LOW);
-  Output = 900;
+  Output = HomePosition;
   stantemp = 0;
-  angle = 900;
+  angle = HomePosition;
 //  standelta = 1;
 }
 
@@ -2344,7 +2349,7 @@ CaseButton2 = digitalRead(34);
      myPID.Compute();  //Run the PID loop
    
 currtime = millis();
-//if ((stantemp == 0) && (servosweepup == 0) && (servosweepdown == 0) && (angle >= 900) && (angle <= 910) && (relayON == 1)){
+//if ((stantemp == 0) && (servosweepup == 0) && (servosweepdown == 0) && (angle >= HomePosition) && (angle <= (HomePosition + 10)) && (relayON == 1)){
 //relayON = 0;
 //previousMillis11 = millis();
 
@@ -2359,7 +2364,7 @@ currtime = millis();
      
    //     zmiana tej funkcji     angle = Output;    
 currtime = millis();
-servoangle = angle - 900;
+servoangle = angle - HomePosition;
   if ((Output > angle) && (currtime - previousMillis3 >= interval3)) {
     angle = angle + 1;
     previousMillis3 = currtime;
@@ -2393,7 +2398,7 @@ servoangle = angle - 900;
      if (tpssetupcomplited == 1){
       Output = desiredangle;
      }else {
-     Output = 900 + (Input*multi);  //trzeba ustawic jak to przeliczyc
+     Output = HomePosition + (Input*multi);  //trzeba ustawic jak to przeliczyc
      }     
      myPID.SetMode(AUTOMATIC);
      digitalWrite (ledpin2, HIGH) ;
@@ -2420,7 +2425,7 @@ servoangle = angle - 900;
       if (tpssetupcomplited == 1){
        Output = desiredangle; 
       }else{
-      Output = 900 + (Input*multi);
+      Output = HomePosition + (Input*multi);
       }
       myPID.SetMode(AUTOMATIC);
       digitalWrite (ledpin2, HIGH);
@@ -2436,7 +2441,7 @@ if ((stantemp == 1) &&(manualspeedup == 0) && (manualspeeddown == 0) && (((Setpo
 if (tpssetupcomplited == 1){
   Output = desiredangle + 170 + modyfikator;
       }else{
-  Output = 900 + (Input*0.55) + 170 + modyfikator;
+  Output = HomePosition + (Input*0.55) + 170 + modyfikator;
       }
 } 
 if ((stantemp == 1) && (manualspeedup == 0) && (manualspeeddown == 0) && (((Input - Setpoint) > 30) || (LPsetspeed == 1))){
@@ -2445,7 +2450,7 @@ if ((stantemp == 1) && (manualspeedup == 0) && (manualspeeddown == 0) && (((Inpu
   if (tpssetupcomplited == 1){
   Output = desiredangle - 70 + modyfikator;
   }else{
-  Output = 900 + (Input*0.55) - 70 + modyfikator;
+  Output = HomePosition  + (Input*0.55) - 70 + modyfikator;
 
       }
 } 
@@ -2458,7 +2463,7 @@ if ((stantemp == 1) && (manualspeedup == 1) && ((((Setpoint - Input) <= 17) && (
       if (tpssetupcomplited == 1){
        Output = desiredangle; 
       }else{
-      Output = 900 + (Input*multi);
+      Output = HomePosition + (Input*multi);
       }
   myPID.SetMode(AUTOMATIC);
   modyfikator = 0;
@@ -2472,7 +2477,7 @@ if ((stantemp == 1) && (manualspeeddown == 1) && ((((Input - Setpoint) <= 17) &&
       if (tpssetupcomplited == 1){
        Output = desiredangle; 
       }else{
-      Output = 900 + (Input*multi);
+      Output = HomePosition + (Input*multi);
       }
   myPID.SetMode(AUTOMATIC);
   modyfikator = 0;
@@ -2482,14 +2487,14 @@ if (manualspeedup == 1){
 if (tpssetupcomplited == 1){
   Output = desiredangle + 170 + modyfikator;
       }else{
-  Output = 900 + (Input*0.55) + 170 + modyfikator;
+  Output = HomePosition + (Input*0.55) + 170 + modyfikator;
       }
 }
 if (manualspeeddown == 1){
   if (tpssetupcomplited == 1){
   Output = desiredangle - 70 + modyfikator;
   }else{
-  Output = 900 + (Input*0.55) - 70 + modyfikator;
+  Output = HomePosition + (Input*0.55) - 70 + modyfikator;
       }
 }
 
@@ -2499,9 +2504,9 @@ if (((Input < 100 || Input >560) && (stantemp == 1)) || ((curentdrow >= curentli
   manualspeedup = 0;
   manualspeeddown = 0;
   digitalWrite (ledpin2, LOW);
-  Output = 900;
+  Output = HomePosition;
   stantemp = 0;
-  angle = 900;
+  angle = HomePosition;
 
   SPcancel = 0;
   SPsetspeed = 0;
@@ -2519,9 +2524,9 @@ if (stanham == LOW){
   manualspeedup = 0;
   manualspeeddown = 0;
   digitalWrite (ledpin2, LOW);
-  Output = 900;
+  Output = HomePosition;
   stantemp = 0;
-  angle = 900;
+  angle = HomePosition;
 
   SPcancel = 0;
   SPsetspeed = 0;
@@ -2611,11 +2616,11 @@ if (Setpoint > 560) {
 }
 
 
-     if (angle < 900) {          // trzeba poprzeliczac z mikrosecund
-      angle = 900;
+     if (angle < HomePosition) {          // trzeba poprzeliczac z mikrosecund
+      angle = HomePosition;
      }
-    if (angle > 1550){
-      angle = 1550;
+    if (angle > EndPosition){
+      angle = EndPosition;
     }
 //    if (Output < 900) {
 //      Output = 900;
@@ -2854,7 +2859,7 @@ if (spA == 1){
   spA = 0;
   spB = 0;
 }
-submenu = constrain(submenu, 0, 10);
+submenu = constrain(submenu, 0, 12);
 
 
 if ((submenu == 0) && (lpA == 1 || lpB == 1)){      // przejscie na low PID
@@ -2927,13 +2932,58 @@ if ((submenu == 10) && (lpA == 1 || lpB == 1)){
   lpB = 0;
   menu = 220;
 }
-
-
+if ((submenu == 11) && (lpA == 1 || lpB == 1)){
+  lpA = 0;
+  lpB = 0;
+  menu = 170;
+}
+if ((submenu == 12) && (lpA == 1 || lpB == 1)){
+  lpA = 0;
+  lpB = 0;
+  menu = 180;
+}
 
 
 
 
 }
+if (menu == 170){
+ if ((lpB == 1) || (lpA == 1)){
+      lpA = 0;
+      lpB = 0;
+      menu = 10;
+     }
+     if (spA == 1){
+      spA = 0;
+      spB = 0;
+      HomePosition++;
+    }    if (spB == 1){
+      spA = 0;
+      spB = 0;
+      HomePosition--; 
+    }
+}
+if (menu == 180){
+ if ((lpB == 1) || (lpA == 1)){
+      lpA = 0;
+      lpB = 0;
+      menu = 10;
+     }
+     if (spA == 1){
+      spA = 0;
+      spB = 0;
+      EndPosition++;
+    }
+    if (spB == 1){
+      spA = 0;
+      spB = 0;
+      EndPosition--; 
+    }
+}
+
+
+
+
 
 if (menu == 90){
 
@@ -3628,7 +3678,12 @@ else if (menu == 221){
 else if (menu == 222){
   menu222();
 }
-
+else if (menu == 170){
+  menu170();
+}
+else if (menu == 180){
+  menu180();
+}
 }
 
 
@@ -3646,7 +3701,7 @@ if ((menu == 0) && (lpA == 1) && (lpB == 0) && (Input == 0) && (servosweepup == 
 
 }
 if ((servosweepup == 1) && (servosweepdown  == 0) && (Input == 0)){
-  Output = 1550;
+  Output = EndPosition;
 
   
 if (servoangle == 0){
@@ -3687,7 +3742,7 @@ else if (servoangle > 650){
 }
   
 }
-if ((servosweepup == 1) && (servosweepdown == 0) && (angle >= 1550)){
+if ((servosweepup == 1) && (servosweepdown == 0) && (angle >= EndPosition)){
   servosweepup = 0;
   servosweepdown = 1;
   tpsmax = tpsraw;
@@ -3701,7 +3756,7 @@ curentlicznik = 146;
   
 }
 if ((servosweepup == 0) && (servosweepdown == 1)){
-  Output = 900;
+  Output = HomePosition;
 if ((tps <= 100) && (tps >75)){
  tpsanglearray[4] = angle; 
 }
@@ -3716,9 +3771,9 @@ else if (tps <= 25){
 }
 }
 
-if ((servosweepup == 0) && (servosweepdown == 1) && (angle <=900)){
+if ((servosweepup == 0) && (servosweepdown == 1) && (angle <=HomePosition)){
   servosweepdown = 0;
-  angle = 900;
+  angle = HomePosition;
   if (curentsensor == 1){
   krancowka = 1;
   EEPROM.put(211, krancowka);
@@ -4794,8 +4849,55 @@ if (submenu == 10){
     strcpy_P(buffer, (char *)pgm_read_word(&(string_table[68])));
   display.println(buffer);  
 }   
-   
-   
+if (submenu == 11){
+
+
+
+
+
+  strcpy_P(buffer, (char *)pgm_read_word(&(string_table[28])));
+  display.print(buffer);
+  if ((gearDisplay == 1) && (gearRatioSet == 1)){
+  strcpy_P(buffer, (char *)pgm_read_word(&(string_table[4])));
+  display.println(buffer);
+  }else{
+    strcpy_P(buffer, (char *)pgm_read_word(&(string_table[5])));
+  display.println(buffer);
+  }
+    strcpy_P(buffer, (char *)pgm_read_word(&(string_table[30])));
+  display.println(buffer);
+    strcpy_P(buffer, (char *)pgm_read_word(&(string_table[38])));
+  display.println(buffer);
+    strcpy_P(buffer, (char *)pgm_read_word(&(string_table[63])));
+  display.println(buffer);
+    strcpy_P(buffer, (char *)pgm_read_word(&(string_table[66])));
+  display.println(buffer);
+    strcpy_P(buffer, (char *)pgm_read_word(&(string_table[67])));
+  display.println(buffer);
+      strcpy_P(buffer, (char *)pgm_read_word(&(string_table[89])));
+  display.println(buffer);   
+}      
+if (submenu == 12){
+
+
+
+
+
+    strcpy_P(buffer, (char *)pgm_read_word(&(string_table[30])));
+  display.println(buffer);
+    strcpy_P(buffer, (char *)pgm_read_word(&(string_table[38])));
+  display.println(buffer);
+    strcpy_P(buffer, (char *)pgm_read_word(&(string_table[63])));
+  display.println(buffer);
+    strcpy_P(buffer, (char *)pgm_read_word(&(string_table[66])));
+  display.println(buffer);
+    strcpy_P(buffer, (char *)pgm_read_word(&(string_table[67])));
+  display.println(buffer);  
+      strcpy_P(buffer, (char *)pgm_read_word(&(string_table[90])));
+  display.println(buffer); 
+      strcpy_P(buffer, (char *)pgm_read_word(&(string_table[91])));
+  display.println(buffer); 
+}      
    
    
    display.display();
@@ -6148,5 +6250,28 @@ break;
 
   
 }
+}
+void menu170(){
+display.clearDisplay();
+display.setTextSize(1);  
+display.setTextColor(WHITE);
+display.setCursor(0, 25);
+  strcpy_P(buffer, (char *)pgm_read_word(&(string_table[90])));
+  display.println(buffer);
+
+  display.print(HomePosition);
+   display.display();  
+}
+void menu180(){
+display.clearDisplay();
+display.setTextSize(1);  
+display.setTextColor(WHITE);
+display.setCursor(0, 25);
+  strcpy_P(buffer, (char *)pgm_read_word(&(string_table[92])));
+  display.println(buffer);
+
+  display.print(EndPosition);
+   display.display();  
+  
 }
   ///////////////////////////////////////////END of program/////////////////////////////////////////
