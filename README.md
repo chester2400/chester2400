@@ -21,7 +21,10 @@ Here is a prototype PCB with changes I made later.
 And here is the 3D printed main unit case and PCB.  
 ![Prototype pcb and case](https://github.com/chester2400/chester2400/blob/main/git2.jpeg)  
 I have also designed an SMD board already assembled to fit over a standard arduino 2560 mega as a sheild, but since its not a comercial device i decided not to make it.  
-If there are people that would be interested in that it is posible to make them.
+If there are people that would be interested in that it is posible to make them.  
+
+New update.  
+I'm curently working on a power suply for the servo to get rid of the UBC and have everything on the borad. 
 
 <!---
 chester2400/chester2400 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
