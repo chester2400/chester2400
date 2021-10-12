@@ -27,8 +27,8 @@ New update.
 I'm curently working on a power suply for the servo to get rid of the UBC and have everything on the borad.  
 
 Here are new buttos for the cc. Ones I have tested them, I will upload the stl files. This design is for DL1000A but im sure it can be altered to fit any/most bikes.   
-![New buttons](https://github.com/chester2400/chester2400/blob/main/buttos.jpg)  
-  
+![New buttons](https://github.com/chester2400/chester2400/blob/main/buttos.jpg)    
+![New buttons2](https://github.com/chester2400/chester2400/blob/main/buttons 2.jpg)    
     
       
       
