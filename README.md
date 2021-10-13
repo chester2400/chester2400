@@ -8,8 +8,8 @@ Here I will add code scematics and all usefull data to build cruise control.
 I will update the files whenever I have time.  
 -If you have any questions concerning thiss build please feel free to ask.  
 -The whole device consists of couple of elements:
-- main unit with arduino 2560 pro mini, bluetooth module, optional oled screen and a min 6A ubec to power the servomotor.
-- servo motor to control the throttle.
+- main unit with arduino 2560 pro mini, bluetooth module, optional oled screen and a min 5A ubec or buck converter to power the servomotor at 6v.
+- servo motor to control the throttle. I used savox sc-1251mg. If you use another make sure it turns freeley(no binding) with no power and have inaf torque.
 - dispay unit with arduino nano every (plain nano didnt have inaf memory for the whole program), oled display, and 5 RGB LED's (this unit is optional and not necesery for the cruise control funcionality but at this moment at least one oled screen is necesary to setup and tune PID's).
 - quickshifter sensor swich (also optional).
 - 3 button unit, 2 momentary pushbuttons and one on/off to power the main unit and to turn it off in case of emergancy.
