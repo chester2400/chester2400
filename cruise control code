@@ -4324,9 +4324,9 @@ if (Serial1.available() > 17){
 
     }    
 } else {
-byte erase;
+byte erasebuffer;
 for (int i = 0; i <= 17; i++){
-  erase = Serial1.read();
+  erasebuffer = Serial1.read();
 }
 
   
@@ -5417,6 +5417,7 @@ void menu120(){
   for (int d = 0; d <= EEPROM.length(); d++){
    EEPROM.write(d,0);  
   }
+  EEPROM.put(4000, 1);
   menu = 140;
 }
 void menu140()
