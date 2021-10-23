@@ -133,11 +133,11 @@ const char string_89[] PROGMEM = ">Set servo home position";
 const char string_90[] PROGMEM = " Set servo home position";
 const char string_91[] PROGMEM = ">Set servo end position";
 const char string_92[] PROGMEM = " Set servo end position";
+const char string_93[] PROGMEM = "PRESS BRAKE";
+const char string_94[] PROGMEM = "SHORT CIRCUT";
+const char string_95[] PROGMEM = "IN BUTTON MODULE";
 
-
-
-
-const char *const string_table[] PROGMEM = {string_0, string_1, string_2, string_3, string_4, string_5,string_6, string_7, string_8, string_9, string_10, string_11,string_12, string_13, string_14, string_15, string_16, string_17, string_18, string_19, string_20, string_21, string_22, string_23, string_24, string_25, string_26, string_27, string_28, string_29, string_30, string_31, string_32, string_33, string_34, string_35, string_36, string_37, string_38, string_39, string_40, string_41, string_42, string_43, string_44, string_45, string_46, string_47, string_48, string_49, string_50, string_51, string_52, string_53, string_54, string_55, string_56, string_57, string_58, string_59, string_60, string_61, string_62, string_63, string_64, string_65, string_66, string_67, string_68, string_69, string_70, string_71, string_72, string_73, string_74, string_75, string_76, string_77, string_78, string_79, string_80, string_81, string_82, string_83, string_84, string_85, string_86, string_87, string_88, string_89, string_90, string_91, string_92};
+const char *const string_table[] PROGMEM = {string_0, string_1, string_2, string_3, string_4, string_5,string_6, string_7, string_8, string_9, string_10, string_11,string_12, string_13, string_14, string_15, string_16, string_17, string_18, string_19, string_20, string_21, string_22, string_23, string_24, string_25, string_26, string_27, string_28, string_29, string_30, string_31, string_32, string_33, string_34, string_35, string_36, string_37, string_38, string_39, string_40, string_41, string_42, string_43, string_44, string_45, string_46, string_47, string_48, string_49, string_50, string_51, string_52, string_53, string_54, string_55, string_56, string_57, string_58, string_59, string_60, string_61, string_62, string_63, string_64, string_65, string_66, string_67, string_68, string_69, string_70, string_71, string_72, string_73, string_74, string_75, string_76, string_77, string_78, string_79, string_80, string_81, string_82, string_83, string_84, string_85, string_86, string_87, string_88, string_89, string_90, string_91, string_92, string_93, string_94, string_95};
 
 
 char buffer[25];
@@ -1335,6 +1335,11 @@ int sampleRate; // Variable that determines how fast our PID loop runs
 
 unsigned long prevlicznik = 0;
 unsigned long prevlicznik1 = 0;
+
+
+
+
+byte error = 0;
     
  void setup()
 {
@@ -1658,8 +1663,55 @@ attachInterrupt(digitalPinToInterrupt(2), Pulse_EventRPM, FALLING );
 Kp = Kpl;
 Ki = Kil;
 Kd = Kdl;
+
+while (digitalRead(hamulec) == HIGH){
+  // dodac wyswieltanie press brake
+  pressbrake();
+  error = 1;
+  Serial1.write('m');
+    Serial1.write(menu);
+    Serial1.write(submenu);
+    Serial1.write(submenu1);
+    Serial1.write(submenu2);   
+    Serial1.write(submenu3);
+    Serial1.write(submenu4);
+    Serial1.write(submenu5);
+    Serial1.write(submenu8);
+    Serial1.write(submenu9);
+    Serial1.write(submenu7);
+    Serial1.write(rgbsetupON);
+    Serial1.write(ledDataSent);
+    Serial1.write(error);
+    delay(200);
+}
+error = 0;
+digitalWrite(ledPin, HIGH);
+while ((digitalRead(setspeed) == LOW) || (digitalRead(cancel) == LOW)){
+  // dodac wysietlanie short circut i buttons module
+  error = 2;
+  shortcircut();
+  Serial1.write('m');
+    Serial1.write(menu);
+    Serial1.write(submenu);
+    Serial1.write(submenu1);
+    Serial1.write(submenu2);   
+    Serial1.write(submenu3);
+    Serial1.write(submenu4);
+    Serial1.write(submenu5);
+    Serial1.write(submenu8);
+    Serial1.write(submenu9);
+    Serial1.write(submenu7);
+    Serial1.write(rgbsetupON);
+    Serial1.write(ledDataSent);
+    Serial1.write(error);
+    delay(200);
+}
+error = 0;
+
 digitalWrite(servorelay, HIGH);
-    digitalWrite(ledPin, HIGH);
+
+
+
      
   myPID.SetTunings(Kp, Ki, Kd);
 // pixels.begin();
@@ -2554,61 +2606,61 @@ if (stanham == LOW){
 ///*
 if (curentsensor == 1){
 
-if (servoangle <= 60){
+if (servoangle <= (((EndPosition - HomePosition)/11)*1)){
   Xinput = 0;
   XI1 = 0;
  
 }
-else if ((servoangle > 60) && (servoangle <= 120)){
+else if ((servoangle <= (((EndPosition - HomePosition)/11)*1)) && (servoangle > (((EndPosition - HomePosition)/11)*2))){
   Xinput = 1;
-  XI1 = 60;
+  XI1 = (((EndPosition - HomePosition)/11)*1);
  
 }
-else if ((servoangle > 120) && (servoangle <= 180)){
+else if ((servoangle <= (((EndPosition - HomePosition)/11)*2)) && (servoangle > (((EndPosition - HomePosition)/11)*3))){
   Xinput = 2;
-  XI1 = 120;
+  XI1 = (((EndPosition - HomePosition)/11)*2);
 
 }
-else if ((servoangle > 180) && (servoangle <= 240)){
+else if ((servoangle <= (((EndPosition - HomePosition)/11)*3)) && (servoangle > (((EndPosition - HomePosition)/11)*4))){
   Xinput = 3;
-  XI1 = 180;
+  XI1 = (((EndPosition - HomePosition)/11)*3);
 
 }
-else if ((servoangle > 240) && (servoangle <= 300)){
+else if ((servoangle <= (((EndPosition - HomePosition)/11)*4)) && (servoangle > (((EndPosition - HomePosition)/11)*5))){
   Xinput = 4;
-  XI1 = 240;
+  XI1 = (((EndPosition - HomePosition)/11)*4);
 
 }
-else if ((servoangle > 300) && (servoangle <= 360)){
+else if ((servoangle <= (((EndPosition - HomePosition)/11)*5)) && (servoangle > (((EndPosition - HomePosition)/11)*6))){
   Xinput = 5;
-  XI1 = 300;
+  XI1 = (((EndPosition - HomePosition)/11)*5);
 
 }
-else if ((servoangle > 360) && (servoangle <= 420)){
+else if ((servoangle <= (((EndPosition - HomePosition)/11)*6)) && (servoangle > (((EndPosition - HomePosition)/11)*7))){
   Xinput = 6;
-  XI1 = 360;
+  XI1 = (((EndPosition - HomePosition)/11)*6);
 
 }
-else if ((servoangle > 420) && (servoangle <= 480)){
+else if ((servoangle <= (((EndPosition - HomePosition)/11)*7)) && (servoangle > (((EndPosition - HomePosition)/11)*8))){
   Xinput = 7;
-  XI1 = 420;
+  XI1 = (((EndPosition - HomePosition)/11)*7);
  ;
 }
-else if ((Input > 480) && (Input <= 540)){
+else if ((servoangle <= (((EndPosition - HomePosition)/11)*8)) && (servoangle > (((EndPosition - HomePosition)/11)*9))){
   Xinput = 8;
-  XI1 = 480;
+  XI1 = (((EndPosition - HomePosition)/11)*8);
  
 }
-else if ((servoangle > 540) && (servoangle <= 600)){
+else if ((servoangle <= (((EndPosition - HomePosition)/11)*9)) && (servoangle > (((EndPosition - HomePosition)/11)*10))){
   Xinput = 9;
-  XI1 = 540;
+  XI1 = (((EndPosition - HomePosition)/11)*9);
   }
-  else if (servoangle > 600){
+  else if (servoangle > (((EndPosition - HomePosition)/11)*10)){
     Xinput = 10;
-    XI1 = 600;
+    XI1 = (((EndPosition - HomePosition)/11)*10);
   }
 Xinput1 = Xinput + 1;
-XI2 = XI1 + 60;
+XI2 = XI1 + (((EndPosition - HomePosition)/11)*1);
 Q1 = curentTreshholdarray[Xinput];
 Q2 = curentTreshholdarray[Xinput1];
 
@@ -3715,37 +3767,37 @@ if ((servosweepup == 1) && (servosweepdown  == 0) && (Input == 0)){
 if (servoangle == 0){
   curentTreshholdarray[Xinput] = curentdrow;                                 // seting curentlimit
 }
-else if (servoangle > 60){
+else if (servoangle > (((EndPosition - HomePosition)/11)*1)){
   curentTreshholdarray[Xinput] = curentdrow;  
 }
-else if (servoangle > 120){
+else if (servoangle > (((EndPosition - HomePosition)/11)*2)){
   curentTreshholdarray[Xinput] = curentdrow;  
 }
-else if (servoangle > 180){
+else if (servoangle > (((EndPosition - HomePosition)/11)*3)){
   curentTreshholdarray[Xinput] = curentdrow;  
 }
-else if (servoangle > 240){
+else if (servoangle > (((EndPosition - HomePosition)/11)*4)){
   curentTreshholdarray[Xinput] = curentdrow;  
 }
-else if (servoangle > 300){
+else if (servoangle > (((EndPosition - HomePosition)/11)*5)){
   curentTreshholdarray[Xinput] = curentdrow;  
 }
-else if (servoangle > 360){
+else if (servoangle > (((EndPosition - HomePosition)/11)*6)){
   curentTreshholdarray[Xinput] = curentdrow;  
 }
-else if (servoangle > 420){
+else if (servoangle > (((EndPosition - HomePosition)/11)*7)){
   curentTreshholdarray[Xinput] = curentdrow;  
 }
-else if (servoangle > 480){
+else if (servoangle > (((EndPosition - HomePosition)/11)*8)){
   curentTreshholdarray[Xinput] = curentdrow;  
 }
-else if (servoangle > 540){
+else if (servoangle > (((EndPosition - HomePosition)/11)*9)){
   curentTreshholdarray[Xinput] = curentdrow;  
 }
-else if (servoangle > 600){
+else if (servoangle > (((EndPosition - HomePosition)/11)*10)){
   curentTreshholdarray[Xinput] = curentdrow;  
 }
-else if (servoangle > 650){
+else if (servoangle > (((EndPosition - HomePosition)/11)*11)){
   curentTreshholdarray[11] = curentdrow;                         // end of curent limit setup
 }
   
@@ -3980,6 +4032,7 @@ if (currtime - BlinkPrev >= SerialInterval){
     Serial1.write(submenu7);
     Serial1.write(rgbsetupON);
     Serial1.write(ledDataSent);
+    Serial1.write(error);
 
   
 if ((menu == 0) || (menu == 10) || (menu == 70)) {
@@ -6292,5 +6345,26 @@ display.setCursor(0, 25);
   display.print(EndPosition);
    display.display();  
   
+}
+void pressbrake (){
+display.clearDisplay();
+display.setTextSize(1);  
+display.setTextColor(WHITE);
+display.setCursor(0, 25);
+  strcpy_P(buffer, (char *)pgm_read_word(&(string_table[93])));
+  display.println(buffer);
+
+   display.display();    
+}
+void shortcircut(){
+display.clearDisplay();
+display.setTextSize(1);  
+display.setTextColor(WHITE);
+display.setCursor(0, 25);
+  strcpy_P(buffer, (char *)pgm_read_word(&(string_table[94])));
+  display.println(buffer);
+  strcpy_P(buffer, (char *)pgm_read_word(&(string_table[95])));
+  display.println(buffer);
+   display.display();  
 }
   ///////////////////////////////////////////END of program/////////////////////////////////////////
