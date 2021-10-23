@@ -1411,8 +1411,16 @@ shiftready = 1;
 //EEPROM.put(34,0);
 
 
+//// first run clears eeprom/////////////////////
 
-
+EEPROM.get(4000, eprombyte);
+if (eprombyte != 1){
+    for (int d = 0; d <= EEPROM.length(); d++){
+   EEPROM.write(d,0);  
+  }
+  EEPROM.put(4000, 1);
+}
+//end first run////////////////////////////////
 
 EEPROM.get(0, epromfloat);
 if (epromfloat > 0){
