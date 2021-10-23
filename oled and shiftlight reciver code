@@ -126,11 +126,14 @@ const char string_89[] PROGMEM = ">Set servo home position";
 const char string_90[] PROGMEM = " Set servo home position";
 const char string_91[] PROGMEM = ">Set servo end position";
 const char string_92[] PROGMEM = " Set servo end position";
+const char string_93[] PROGMEM = "PRESS BRAKE";
+const char string_94[] PROGMEM = "SHORT CIRCUT";
+const char string_95[] PROGMEM = "IN BUTTON MODULE";
 
 
 
 
-const char *const string_table[] PROGMEM = {string_0, string_1, string_2, string_3, string_4, string_5,string_6, string_7, string_8, string_9, string_10, string_11,string_12, string_13, string_14, string_15, string_16, string_17, string_18, string_19, string_20, string_21, string_22, string_23, string_24, string_25, string_26, string_27, string_28, string_29, string_30, string_31, string_32, string_33, string_34, string_35, string_36, string_37, string_38, string_39, string_40, string_41, string_42, string_43, string_44, string_45, string_46, string_47, string_48, string_49, string_50, string_51, string_52, string_53, string_54, string_55, string_56, string_57, string_58, string_59, string_60, string_61, string_62, string_63, string_64, string_65, string_66, string_67, string_68, string_69, string_70, string_71, string_72, string_73, string_74, string_75, string_76, string_77, string_78, string_79, string_80, string_81, string_82, string_83, string_84, string_85, string_86, string_87, string_88, string_89, string_90, string_91, string_92};
+const char *const string_table[] PROGMEM = {string_0, string_1, string_2, string_3, string_4, string_5,string_6, string_7, string_8, string_9, string_10, string_11,string_12, string_13, string_14, string_15, string_16, string_17, string_18, string_19, string_20, string_21, string_22, string_23, string_24, string_25, string_26, string_27, string_28, string_29, string_30, string_31, string_32, string_33, string_34, string_35, string_36, string_37, string_38, string_39, string_40, string_41, string_42, string_43, string_44, string_45, string_46, string_47, string_48, string_49, string_50, string_51, string_52, string_53, string_54, string_55, string_56, string_57, string_58, string_59, string_60, string_61, string_62, string_63, string_64, string_65, string_66, string_67, string_68, string_69, string_70, string_71, string_72, string_73, string_74, string_75, string_76, string_77, string_78, string_79, string_80, string_81, string_82, string_83, string_84, string_85, string_86, string_87, string_88, string_89, string_90, string_91, string_92, string_93, string_94, string_95};
 
 
 char buffer[25];
@@ -1067,7 +1070,7 @@ byte ledDataSent = 0;
 unsigned long currtime = millis();
 
 
-
+byte error = 0;
 
 
 void setup() {
@@ -1169,6 +1172,7 @@ if (Tstart == 'm'){
       submenu7 = Serial1.read();
       rgbsetupON = Serial1.read();
       ledDataSent = Serial1.read();
+      error = Serial1.read();
 }
 
 
@@ -1356,7 +1360,16 @@ else if (rgbsetupON == 1){
 if ((currtime - prevtime9 >= interval9)){
 
 
-if (menu == 0){
+if ((menu == 0) && (error == 0)){
+  menu0();
+}
+else if ((menu == 0) && (error == 1)){
+  pressbrake();
+}
+else if ((menu == 0) && (error == 2)){
+  shortcircut();
+}
+else if ((menu == 0) && (error > 2)){
   menu0();
 }
 if (menu == 40){
@@ -2819,4 +2832,26 @@ display.setCursor(0, 25);
   display.print(EndPosition);
    display.display();  
   
+}
+
+void pressbrake (){
+display.clearDisplay();
+display.setTextSize(1);  
+display.setTextColor(WHITE);
+display.setCursor(0, 25);
+  strcpy_P(buffer, (char *)pgm_read_word(&(string_table[93])));
+  display.println(buffer);
+
+   display.display();    
+}
+void shortcircut(){
+display.clearDisplay();
+display.setTextSize(1);  
+display.setTextColor(WHITE);
+display.setCursor(0, 25);
+  strcpy_P(buffer, (char *)pgm_read_word(&(string_table[94])));
+  display.println(buffer);
+  strcpy_P(buffer, (char *)pgm_read_word(&(string_table[95])));
+  display.println(buffer);
+   display.display();  
 }
