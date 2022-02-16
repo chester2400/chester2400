@@ -1581,10 +1581,10 @@ EEPROM.get(199, epromdouble);
 if ((epromdouble > 0) && (epromdouble < 1)){
   multimid = epromdouble;
 }
-//EEPROM.get(203, epromdouble);
-//if ((epromdouble > 0) && (epromdouble < 1)){
-//  multihigh = epromdouble;
-//}
+EEPROM.get(203, epromdouble);
+if ((epromdouble > 0) && (epromdouble < 1)){
+  multihigh = epromdouble;
+}
 
 EEPROM.get(207, epromfloat);
 if ((epromfloat > 0) && (epromfloat < 3)){
@@ -2430,17 +2430,17 @@ currtime = millis();
      
    //     zmiana tej funkcji     angle = Output;    
 currtime = millis();
-servoangle = angle - HomePosition;
+
   if ((Output > angle) && (currtime - previousMillis3 >= interval3)) {
-    angle = angle + 1;
+    angle++;
     previousMillis3 = currtime;
   }
 
   if ((Output < angle) && (currtime - previousMillis3 >= interval3))  {
-    angle = angle - 1;
+    angle--;
     previousMillis3 = currtime;
   }
-
+servoangle = angle - HomePosition;
 //////////////////////////////////////CC buttons  part 2 
 
 
@@ -4017,8 +4017,14 @@ else if (averageRPM > (shiftlightEnd + 200)){
 
 //////////////////////BT//////////////
 if (BTon == 1){
-if (Serial2.available() > 0){
-bluetooth();
+if (Serial2.available() > 3){
+  char Tstart = Serial2.read();
+  if (Tstart == 'B'){
+    Tstart = Serial2.read();
+        if (Tstart == 'T'){
+        bluetooth();
+        }
+  }
 }
 }
 
