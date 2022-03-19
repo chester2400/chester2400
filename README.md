@@ -1,7 +1,7 @@
 - 👋 Hi, I’m @chester2400
 - 👀 I’m interested in developing a cruise control.
 - 🌱 I’m currently learning c++
-- you can back me up with a donation via paypal on https//paypal.me/chester240.mk
+- you can back me up with a donation via paypal on https://paypal.me/chester240.mk
 
 
 Here I will add code scematics and all usefull data to build cruise control.  
