@@ -32,14 +32,22 @@ Here are new buttos for the cc. Ones I have tested them, I will upload the stl f
 I have added new diagrams for new version.
   
   
-I have diceded to offer the pcb's and servo mounting brackets to find futher development. It will be 30 USD including shipping.  
-Please send me an e-mail on chester240.mk@gmail.com with a specific bike you want me to design a mounting bracket.  
+
+
+
+
+
+
+
+I have diceded to offer the pcb's and servo mounting brackets to fund futher development. It will be 30 USD including shipping.  
+Please send me an e-mail on chester240.mk@gmail.com with a specific bike you want me to design a mounting bracket.
+I will update requests here.
 Once inaf people will back me for a certain model i will buy a throttle body and make all happen.
   
   
   
 Vstrom 1000 2014-2020 15 more required.  
-Varadero 1000 2003-2006 injection 19 required.  
+Varadero 1000 2003-2006 19 required.  
     
       
       
