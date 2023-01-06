@@ -1,6 +1,5 @@
 - 👋 Hi, I’m @chester2400
 - 👀 I’m interested in developing a cruise control.
-- 🌱 I’m currently learning c++
 - you can back me up with a donation via paypal on https://paypal.me/chester240
 
 
@@ -31,6 +30,16 @@ Here are new buttos for the cc. Ones I have tested them, I will upload the stl f
 ![New buttons](https://github.com/chester2400/chester2400/blob/main/buttos.jpg)    
 ![New buttons2](https://github.com/chester2400/chester2400/blob/main/buttons2.jpg)    
 I have added new diagrams for new version.
+  
+  
+I have diceded to offer the pcb's and servo mounting brackets to find futher development. It will be 30 USD including shipping.  
+Please send me an e-mail on chester240.mk@gmail.com with a specific bike you want me to design a mounting bracket.  
+Once inaf people will back me for a certain model i will buy a throttle body and make all happen.
+  
+  
+  
+Vstrom 1000 2014 15 more required.  
+Varadero 1000 injection 19 reqiored.  
     
       
       
