@@ -39,7 +39,7 @@ Once inaf people will back me for a certain model i will buy a throttle body and
   
   
 Vstrom 1000 2014-2020 15 more required.  
-Varadero 1000 2003-2006 injection 19 reqiored.  
+Varadero 1000 2003-2006 injection 19 required.  
     
       
       
