@@ -49,7 +49,7 @@ Please send me an e-mail on chester240.mk@gmail.com with a specific bike you wan
 I will update requests here.
 Once inaf people will back me for a certain model i will buy a throttle body and make all happen.
   
-  
+  ![pcb assebeled](https://github.com/chester2400/chester2400/blob/main/IMG_4257.JPG)  
   
 Vstrom 1000 2014-2020 15 more required.  
 Varadero 1000 2003-2006 19 required.  
@@ -60,7 +60,6 @@ Varadero 1000 2003-2006 19 required.
       
     
       
-      ![pcb assebeled](https://github.com/chester2400/chester2400/blob/main/IMG_4257.jpg) 
         
     
       
