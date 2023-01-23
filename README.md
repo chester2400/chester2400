@@ -58,7 +58,9 @@ Varadero 1000 2003-2006 19 required.
     
     https://youtu.be/o_2QjCjgXKo
       
-        
+    
+      
+      ![pcb assebeled](https://github.com/chester2400/chester2400/blob/main/IMG_4257.jpg) 
         
     
       
