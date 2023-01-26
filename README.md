@@ -1,4 +1,4 @@
-- 👋 Hi, I’m @chester2400
+- 👋 Hi, I’m @chester2400   chester240.mk@gmail.com
 - 👀 I’m interested in developing a cruise control.
 - you can back me up with a donation via paypal on https://paypal.me/chester240
 
