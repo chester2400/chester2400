@@ -58,7 +58,8 @@ Once inaf people will back me for a certain model i will buy a throttle body and
     https://youtu.be/o_2QjCjgXKo
       
     
-      
+   The hex files can be loaded to Arduino using Xloader.  
+   https://www.hobbytronics.co.uk/arduino-xloader
         
     
       
