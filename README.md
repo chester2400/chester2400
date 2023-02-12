@@ -9,7 +9,7 @@ I will update the files whenever I have time.
 -The whole device consists of couple of elements:
 - main unit with arduino 2560 pro mini, bluetooth module, optional oled screen and a min 5A ubec or buck converter to power the servomotor at 6v.
 - servo motor to control the throttle. I used savox sc-1251mg. If you use another make sure it turns freeley(no binding) with no power and have inaf torque.
-- dispay unit with arduino nano every (plain nano didnt have inaf memory for the whole program), oled display, and 5 RGB LED's (this unit is optional and not necesery for the cruise control funcionality, some of the parameters of the cruise contol can now be tuned via serial monitor, for all options display is required.).
+- dispay unit with arduino nano (need to burn uno bootloader), oled display, and 5 RGB LED's (this unit is optional and not necesery for the cruise control funcionality, some of the parameters of the cruise contol can now be tuned via serial monitor, for all options display is required.).
 - quickshifter sensor swich (also optional).
 - 3 button unit, 2 momentary pushbuttons and one on/off to power the main unit and to turn it off in case of emergancy.
 - 2 led's to indicate operation ( I used buttons with build in leds)
