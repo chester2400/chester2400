@@ -6,4 +6,9 @@ Materials:
           HC-05 bluetooth module  
           RC servo  
           5A DC-DC converter XL4015E1  
+
+Test videos:
+https://youtu.be/a2qSFfxCBFU  
+https://youtu.be/IM2XrNQepKY  
+
           
